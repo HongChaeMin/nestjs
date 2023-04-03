@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  Get, HttpException,
+  Get,
   Param,
   Patch,
   Post,
