@@ -1,20 +1,14 @@
+import { HttpStatus } from "@nestjs/common";
+
 export class ErrorCode {
 
   message: string;
-  code: string;
+  code: HttpStatus;
 
-  constructor(message: string, code: string) {
+  constructor(message: string, code: HttpStatus) {
     this.message = message;
     this.code = code;
   }
 
-  toResponse(requestUrl: string) {
-    return {
-      requestUrl: requestUrl,
-      message: this.message,
-      code: this.code,
-    };
-  }
-
-  static readonly BROAD_NOT_FOUND = new ErrorCode('Broad Not Found', 'BROAD_NOT_FOUND');
+  static readonly SERVER_ERROR = new ErrorCode('서버에 문제가 발생했습니다. 잠시후 다시 시도해주세요.', HttpStatus.INTERNAL_SERVER_ERROR);
 }

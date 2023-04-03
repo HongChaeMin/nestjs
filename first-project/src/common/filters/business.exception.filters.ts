@@ -1,5 +1,6 @@
 import { BusinessException } from '../exception/business.exception';
-import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
+import { Request, Response } from 'express';
 
 @Catch(BusinessException)
 export class BusinessExceptionFilter implements ExceptionFilter {
@@ -8,9 +9,8 @@ export class BusinessExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
 
-    // response
-    //   .status(HttpStatus.INTERNAL_SERVER_ERROR)
-    //   .status()
-    //   .json(exception.errorCode.toResponse(request.url));
+    response
+      .status(exception.errorCode.code)
+      .json(exception.toResponse(request.url));
   }
 }

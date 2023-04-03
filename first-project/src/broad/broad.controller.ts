@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
+  Get, HttpException,
   Param,
   Patch,
   Post,
@@ -22,14 +22,14 @@ export class BroadController {
     return await this.broadService.getBroads();
   }
 
+  @Get('/error')
+  getError() {
+    throw new BusinessException(ErrorCode.SERVER_ERROR);
+  }
+
   @Get('/:broadId')
   async getOneBroad(@Param('broadId') broadId: number): Promise<BroadResponse> {
     return await this.broadService.getOneBroad(broadId);
-  }
-
-  @Get('/error')
-  getError() {
-    throw new BusinessException(ErrorCode.BROAD_NOT_FOUND);
   }
 
   @Post()
