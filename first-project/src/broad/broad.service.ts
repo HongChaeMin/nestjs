@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Broad } from './models/broad.entity';
+import { Broad } from './entities/broad.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BroadSaveRequest, BroadUpdateRequest } from './dto/broad.request';

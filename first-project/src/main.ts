@@ -11,6 +11,6 @@ async function bootstrap() {
   app.useGlobalFilters(new BusinessExceptionFilter());
   app.useLogger(app.get(LoggerService));
   app.useGlobalInterceptors(new LoggingInterceptor());
-  await app.listen(3000);
+  await app.listen(8080);
 }
 bootstrap();

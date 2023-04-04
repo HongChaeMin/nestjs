@@ -1,4 +1,4 @@
-import { Broad } from '../models/broad.entity';
+import { Broad } from '../entities/broad.entity';
 
 export class BroadSaveRequest {
   title: string;

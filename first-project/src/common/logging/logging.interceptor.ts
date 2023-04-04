@@ -16,13 +16,13 @@ export class LoggingInterceptor implements NestInterceptor {
     const ctx = context.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    this.logger.debug(`RequestUrl: [${request.method}] ${request.url} form`);
 
     const now = Date.now();
     return next
       .handle()
       .pipe(
-        tap(() => this.logger.debug(`Status: ${response.statusCode} / After: ${Date.now() - now}ms form`)),
+        tap(() => this.logger.debug(`RequestUrl: [${request.method || 'GraphQL'}] ${request?.url || ''} form`)),
+        tap(() => this.logger.debug(`Status: ${response.statusCode || 'GraphQL'} / After: ${Date.now() - now}ms form`)),
         tap(json => this.logger.debug(`Response: ${JSON.stringify(json)} form`)),
       );
 
