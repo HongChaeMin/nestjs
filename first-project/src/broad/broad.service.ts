@@ -3,7 +3,7 @@ import { Broad } from './entities/broad.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BroadSaveRequest, BroadUpdateRequest } from './dto/broad.request';
-import { BroadDeleteResponse, BroadResponse } from './dto/broad.response';
+import { BroadDeleteResponse } from './dto/broad.response';
 
 @Injectable()
 export class BroadService {
@@ -12,23 +12,23 @@ export class BroadService {
     private broadRepository: Repository<Broad>,
   ) {}
 
-  async createBroad(request: BroadSaveRequest): Promise<BroadResponse> {
+  async createBroad(request: BroadSaveRequest) {
     const saveBroad = request.toEntity();
     const resultBroad = await this.broadRepository.save(saveBroad);
     return resultBroad.toResponse();
   }
 
-  async getBroads(): Promise<BroadResponse[]> {
+  async getBroads() {
     const broads = await this.broadRepository.find();
     return broads.map((broad) => broad.toResponse());
   }
 
-  async getOneBroad(broadId: number): Promise<BroadResponse> {
+  async getOneBroad(broadId: number) {
     const broad = await this.broadRepository.findOneBy({ id: broadId });
     return broad.toResponse();
   }
 
-  async updateBroad(broadId: number, broad: BroadUpdateRequest): Promise<BroadResponse> {
+  async updateBroad(broadId: number, broad: BroadUpdateRequest) {
     await this.broadRepository.update(
       { id: broadId },
       { title: broad.title, content: broad.content },
@@ -37,7 +37,7 @@ export class BroadService {
     return updateBroad.toResponse();
   }
 
-  async deleteBroad(broadId: number): Promise<BroadDeleteResponse> {
+  async deleteBroad(broadId: number) {
     await this.broadRepository.delete({ id: broadId });
     return new BroadDeleteResponse('success delete.');
   }

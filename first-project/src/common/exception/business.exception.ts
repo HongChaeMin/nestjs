@@ -1,5 +1,6 @@
 import { ErrorCode } from './error.code';
 import { HttpException } from "@nestjs/common";
+import { ApiResponse } from "./api.response";
 
 export class BusinessException extends HttpException {
 
@@ -11,11 +12,9 @@ export class BusinessException extends HttpException {
   }
 
   toResponse(requestUrl: string) {
-    return {
-      message: this.errorCode.message,
-      code: this.errorCode.code,
+    return ApiResponse.ERROR(this.errorCode, { etc: {
       requestUrl: requestUrl,
       timestamp: new Date().toISOString()
-    };
+    }});
   }
 }
