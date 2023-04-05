@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-const configuration: TypeOrmModuleOptions = {
+const databaseConf: TypeOrmModuleOptions = {
   type: 'mariadb',
   host: '127.0.0.1',
   port: 3306,
@@ -13,4 +13,4 @@ const configuration: TypeOrmModuleOptions = {
   synchronize: true,
 };
 
-export default configuration;
+export default databaseConf;

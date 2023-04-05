@@ -12,9 +12,9 @@ export class BusinessException extends HttpException {
   }
 
   toResponse(requestUrl: string) {
-    return ApiResponse.ERROR(this.errorCode, { etc: {
+    return ApiResponse.ERROR(this.errorCode, {
       requestUrl: requestUrl,
       timestamp: new Date().toISOString()
-    }});
+    });
   }
 }

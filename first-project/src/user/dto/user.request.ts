@@ -1,4 +1,5 @@
 import { User } from '../eneities/user.entity';
+import { hash } from '../../common/encode/password.encode';
 
 export class UserSaveRequest {
   account: string;
@@ -7,7 +8,7 @@ export class UserSaveRequest {
   email: string;
   phone: string;
 
-  async toEntity(hash: (plainText: string) => Promise<string>) {
+  async toEntity() {
     const user = new User();
     user.account = this.account;
     user.password = await hash(this.password)

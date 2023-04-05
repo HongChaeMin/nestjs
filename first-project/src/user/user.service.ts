@@ -2,29 +2,28 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './eneities/user.entity';
 import { Repository } from 'typeorm';
 import { UserSaveRequest, UserSignInRequest, UserUpdateRequest } from './dto/user.request';
-import { hash, isHashValid } from '../common/encode/password.encode';
-import { UserDeleteResponse } from './dto/user.response';
-import { BusinessException } from '../common/exception/business.exception';
-import { ErrorCode } from '../common/exception/error.code';
+import { UserDeleteResponse, UserSignInResponse } from './dto/user.response';
+import { UserServiceUtil } from './utils/user.service.util';
+import { JwtService } from '@nestjs/jwt';
 
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private readonly userRepository: Repository<User>,
+    private readonly jwtService: JwtService,
   ) {}
 
   async create(request: UserSaveRequest) {
-    const user = await request.toEntity(hash);
+    const user = await request.toEntity();
     const resultUser = await this.userRepository.save(user);
     return resultUser.toResponse();
   }
 
   async signIn(request: UserSignInRequest) {
-    const user = await this.userRepository.findOneBy({account: request.account});
-    if (user && await isHashValid(request.password, user.password)) {
-      throw new BusinessException(ErrorCode.NOT_EXIST_USER);
-    }
-    return 'success';
+    const user = await this.userRepository.findOneBy({ account: request.account });
+    await UserServiceUtil.checkValid(user, request.password);
+    const token = UserServiceUtil.getToken(this.jwtService, user.id);
+    return UserSignInResponse.of(token);
   }
 
   async findUser(id: number) {

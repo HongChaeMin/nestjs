@@ -6,23 +6,23 @@ import { UserResponse } from '../dto/user.response';
 @Entity()
 export class User extends BaseEntity {
 
-  @Column()
-  account!: string;
+  @Column({ unique: true, nullable: false })
+  account: string;
+
+  @Column({ nullable: false })
+  password: string;
+
+  @Column({ nullable: false })
+  name: string;
+
+  @Column({ unique: true, nullable: false })
+  email: string;
 
   @Column()
-  password!: string;
-
-  @Column()
-  name!: string;
-
-  @Column()
-  email!: string;
-
-  @Column()
-  phone!: string;
+  phone: string;
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.SILVER })
-  role!: UserRole;
+  role: UserRole;
 
   toResponse() {
     return new UserResponse(
