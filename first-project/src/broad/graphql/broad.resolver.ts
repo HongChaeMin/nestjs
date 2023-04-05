@@ -1,20 +1,27 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { BroadGraphService } from './broad.graph.service';
-import { BroadGraphRequest, BroadGraphResponse } from './broad.dto';
+import { BroadResponse } from '../dto/broad.response';
+import { BroadService } from '../broad.service';
+import { BroadSaveRequest, BroadUpdateRequest } from '../dto/broad.request';
 
 @Resolver()
 export class BroadResolver {
   constructor(
-    private readonly broadGraphService: BroadGraphService,
+    private readonly broadService: BroadService,
   ) {}
 
-  @Query(() => [BroadGraphResponse])
+  @Query(() => [BroadResponse])
   async getBroads() {
-    return await this.broadGraphService.getBroads();
+    return await this.broadService.getBroads();
   }
 
-  @Mutation(() => BroadGraphResponse)
-  async saveBroad(@Args('broad') request: BroadGraphRequest) {
-    return await this.broadGraphService.saveBroad(request);
+  @Mutation(() => BroadResponse)
+  async saveBroad(@Args('broad') request: BroadSaveRequest) {
+    return await this.broadService.createBroad(request);
   }
+
+  @Mutation(() => BroadResponse)
+  async updateBroad(@Args('broadId') broadId: number, @Args('broad') request: BroadUpdateRequest) {
+    return await this.broadService.updateBroad(broadId, request);
+  }
+
 }

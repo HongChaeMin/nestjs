@@ -1,8 +1,13 @@
 import { Broad } from '../entities/broad.entity';
+import { Field, InputType } from "@nestjs/graphql";
 
+@InputType()
 export class BroadSaveRequest {
+  @Field(() => String)
   title: string;
+  @Field(() => String)
   content: string;
+  @Field(() => String)
   writer: string;
 
   toEntity() {
@@ -14,7 +19,10 @@ export class BroadSaveRequest {
   }
 }
 
+@InputType()
 export class BroadUpdateRequest {
+  @Field(() => String)
   title: string;
+  @Field(() => String)
   content: string;
 }

@@ -1,7 +1,7 @@
 import { Column, Entity } from 'typeorm';
 import { BaseEntity } from '../../common/entities/base.entity';
 import { UserRole } from './user.role';
-import { UserResponse } from "../dto/user.response";
+import { UserResponse } from '../dto/user.response';
 
 @Entity()
 export class User extends BaseEntity {
