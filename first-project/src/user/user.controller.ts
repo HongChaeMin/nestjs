@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { UserSaveRequest, UserSignInRequest, UserUpdateRequest } from './dto/user.request';
 import { UserService } from './user.service';
 import { ApiResponse } from '../common/exception/api.response';
-import { UserSaveRequest, UserSignInRequest, UserUpdateRequest } from './dto/user.request';
+import { AuthGuard } from '../common/auth/auth.guard';
 
 @Controller('/users')
 export class UserController {
@@ -9,6 +10,7 @@ export class UserController {
     private readonly userService: UserService,
   ) {}
 
+  @UseGuards(AuthGuard)
   @Get('/:userId')
   async getUser(@Param('userId') id: number) {
     const result = await this.userService.findUser(id);

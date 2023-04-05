@@ -3,10 +3,10 @@ import { BroadModule } from './broad/broad.module';
 import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import databaseConf from './common/database/configuration';
-import { LoggerModule } from "./common/logging/logger.module";
-import { GraphQLModule } from "@nestjs/graphql";
-import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
-import { UserModule } from "./user/user.module";
+import { LoggerModule } from './common/logging/logger.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [

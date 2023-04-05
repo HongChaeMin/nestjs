@@ -1,6 +1,6 @@
-import { BusinessException } from "../../common/exception/business.exception";
-import { ErrorCode } from "../../common/exception/error.code";
-import { isHashValid } from "../../common/encode/password.encode";
+import { BusinessException } from '../../common/exception/business.exception';
+import { ErrorCode } from '../../common/exception/error.code';
+import { isHashValid } from '../../common/encode/password.encode';
 
 export class UserServiceUtil {
 
@@ -10,7 +10,7 @@ export class UserServiceUtil {
   }
 
   static getToken(jwtService, id) {
-    return jwtService.sign({ id })
+    return jwtService.signAsync({ id })
   }
 
 }

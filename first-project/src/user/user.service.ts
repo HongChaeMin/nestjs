@@ -22,7 +22,7 @@ export class UserService {
   async signIn(request: UserSignInRequest) {
     const user = await this.userRepository.findOneBy({ account: request.account });
     await UserServiceUtil.checkValid(user, request.password);
-    const token = UserServiceUtil.getToken(this.jwtService, user.id);
+    const token = await UserServiceUtil.getToken(this.jwtService, user.id);
     return UserSignInResponse.of(token);
   }
 
