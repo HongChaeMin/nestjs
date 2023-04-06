@@ -1,6 +1,6 @@
 import { BaseEntity } from '../../common/entities/base.entity';
 import { Column, Entity } from 'typeorm';
-import { BroadResponse } from '../dto/broad.response';
+import { BroadResponse } from '../dto/response/response';
 
 @Entity()
 export class Broad extends BaseEntity {
