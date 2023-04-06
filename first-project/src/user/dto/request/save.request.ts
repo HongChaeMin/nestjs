@@ -1,5 +1,5 @@
-import { User } from '../eneities/user.entity';
-import { hash } from '../../common/encode/password.encode';
+import { User } from "../../entities/user.entity";
+import { hash } from "../../../common/encode/password.encode";
 
 export class UserSaveRequest {
   account: string;
@@ -17,15 +17,4 @@ export class UserSaveRequest {
     user.phone = this.phone;
     return user;
   }
-}
-
-export class UserSignInRequest {
-  account: string;
-  password: string;
-}
-
-export class UserUpdateRequest {
-  name: string;
-  email: string;
-  phone: string;
 }

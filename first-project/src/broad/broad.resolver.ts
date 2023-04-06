@@ -1,7 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { BroadResponse } from '../dto/broad.response';
-import { BroadService } from '../broad.service';
-import { BroadSaveRequest, BroadUpdateRequest } from '../dto/broad.request';
+import { BroadService } from './broad.service';
+import { BroadSaveRequest } from './dto/request/save.request';
+import { BroadUpdateRequest } from './dto/request/update.request';
+import { BroadResponse } from './dto/response/response';
 
 @Resolver()
 export class BroadResolver {

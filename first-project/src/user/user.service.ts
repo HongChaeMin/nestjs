@@ -1,10 +1,13 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './eneities/user.entity';
+import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { UserSaveRequest, UserSignInRequest, UserUpdateRequest } from './dto/user.request';
-import { UserDeleteResponse, UserSignInResponse } from './dto/user.response';
 import { UserServiceUtil } from './utils/user.service.util';
 import { JwtService } from '@nestjs/jwt';
+import { UserSaveRequest } from './dto/request/save.request';
+import { UserSignInRequest } from './dto/request/sign.in.request';
+import { UserUpdateRequest } from './dto/request/update.request';
+import { UserSignInResponse } from "./dto/response/sign.in.response";
+import { UserDeleteResponse } from "./dto/response/delete.response";
 
 export class UserService {
   constructor(

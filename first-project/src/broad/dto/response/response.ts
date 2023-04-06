@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 export class BroadResponse {
@@ -29,13 +29,4 @@ export class BroadResponse {
   createdAt: Date;
   @Field(() => Date)
   updatedAt: Date;
-}
-
-@ObjectType()
-export class BroadDeleteResponse {
-  constructor(message: string) {
-    this.message = message;
-  }
-  @Field(() => String)
-  message: string;
 }

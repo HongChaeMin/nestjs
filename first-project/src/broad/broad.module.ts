@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BroadController } from './broad.controller';
 import { BroadService } from './broad.service';
 import { Broad } from './entities/broad.entity';
-import { BroadResolver } from "./graphql/broad.resolver";
+import { BroadResolver } from "./broad.resolver";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Broad])],

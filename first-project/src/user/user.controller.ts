@@ -1,8 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { UserSaveRequest, UserSignInRequest, UserUpdateRequest } from './dto/user.request';
 import { UserService } from './user.service';
 import { ApiResponse } from '../common/exception/api.response';
 import { AuthGuard } from '../common/auth/auth.guard';
+import { UserSaveRequest } from "./dto/request/save.request";
+import { UserSignInRequest } from "./dto/request/sign.in.request";
+import { UserUpdateRequest } from "./dto/request/update.request";
 
 @Controller('/users')
 export class UserController {

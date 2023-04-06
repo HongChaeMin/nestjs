@@ -27,21 +27,3 @@ export class UserResponse {
   createdAt: Date;
   updatedAt: Date;
 }
-
-export class UserSignInResponse {
-  constructor(token: string) {
-    this.token = token;
-  }
-  token: string;
-
-  static of(token: string) {
-    return new UserSignInResponse(token);
-  }
-}
-
-export class UserDeleteResponse {
-  constructor(message: string) {
-    this.message = message;
-  }
-  message: string;
-}

@@ -1,5 +1,5 @@
-import { Broad } from '../entities/broad.entity';
 import { Field, InputType } from "@nestjs/graphql";
+import { Broad } from "../../entities/broad.entity";
 
 @InputType()
 export class BroadSaveRequest {
@@ -17,12 +17,4 @@ export class BroadSaveRequest {
     broad.writer = this.writer;
     return broad;
   }
-}
-
-@InputType()
-export class BroadUpdateRequest {
-  @Field(() => String)
-  title: string;
-  @Field(() => String)
-  content: string;
 }

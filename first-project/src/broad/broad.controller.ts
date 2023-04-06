@@ -8,10 +8,11 @@ import {
   Post,
 } from '@nestjs/common';
 import { BroadService } from './broad.service';
-import { BroadSaveRequest, BroadUpdateRequest } from "./dto/broad.request";
-import { BusinessException } from "../common/exception/business.exception";
-import { ErrorCode } from "../common/exception/error.code";
-import { ApiResponse } from "../common/exception/api.response";
+import { BusinessException } from '../common/exception/business.exception';
+import { ErrorCode } from '../common/exception/error.code';
+import { ApiResponse } from '../common/exception/api.response';
+import { BroadUpdateRequest } from './dto/request/update.request';
+import { BroadSaveRequest } from './dto/request/save.request';
 
 @Controller('/broads')
 export class BroadController {
