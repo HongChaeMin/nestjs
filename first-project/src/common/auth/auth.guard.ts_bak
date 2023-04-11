@@ -23,8 +23,9 @@ export class AuthGuard {
     try {
       const token = request.headers.auth;
       this.jwtService.verify(token, jwtConf);
-      const json = this.jwtService.decode(token, { json: true }) as { id: number };
-      this.logger.debug(json.id)
+      // const json = this.jwtService.decode(token, { json: true }) as { id: number };
+      // this.logger.debug(json.id)
+      // request.headers.id = json.id;
     } catch (e) {
       throw new BusinessException(ErrorCode.FORBIDDEN);
     }

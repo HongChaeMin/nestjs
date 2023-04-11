@@ -15,6 +15,11 @@ export class BroadResolver {
     return await this.broadService.getBroads();
   }
 
+  @Query(() => BroadResponse)
+  async getOneBroad(@Args('broadId') broadId: number) {
+    return await this.broadService.getOneBroad(broadId);
+  }
+
   @Mutation(() => BroadResponse)
   async saveBroad(@Args('broad') request: BroadSaveRequest) {
     return await this.broadService.createBroad(request);

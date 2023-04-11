@@ -1,10 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiResponse } from '../common/exception/api.response';
-import { AuthGuard } from '../common/auth/auth.guard';
-import { UserSaveRequest } from "./dto/request/save.request";
-import { UserSignInRequest } from "./dto/request/sign.in.request";
-import { UserUpdateRequest } from "./dto/request/update.request";
+import { UserSaveRequest } from './dto/request/save.request';
+import { UserSignInRequest } from './dto/request/sign.in.request';
+import { UserUpdateRequest } from './dto/request/update.request';
+import { IdPipe } from "../common/pipes/id.pipe";
+import { AuthGuard } from '@nestjs/passport';
+import { UserGuard } from '../common/auth/user.guard';
+import { UserId } from '../common/auth/user.param';
 
 @Controller('/users')
 export class UserController {
@@ -12,9 +15,9 @@ export class UserController {
     private readonly userService: UserService,
   ) {}
 
-  @UseGuards(AuthGuard)
-  @Get('/:userId')
-  async getUser(@Param('userId') id: number) {
+  @UseGuards(AuthGuard('jwt'))
+  @Get()
+  async getUser(@UserId() id: number) {
     const result = await this.userService.findUser(id);
     return ApiResponse.SUCCESS(result);
   }
@@ -31,6 +34,7 @@ export class UserController {
     return ApiResponse.SUCCESS(result);
   }
 
+  @UseGuards(UserGuard)
   @Patch('/:userId')
   async updateUser(@Param('userId') id: number, @Body() request: UserUpdateRequest) {
     const result = await this.userService.updateUser(id, request);

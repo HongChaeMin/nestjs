@@ -1,11 +1,19 @@
-import { User } from "../../entities/user.entity";
-import { hash } from "../../../common/encode/password.encode";
+import { User } from '../../entities/user.entity';
+import { hash } from '../../../common/encode/password.encode';
+import { Field, InputType } from '@nestjs/graphql';
 
+@InputType()
 export class UserSaveRequest {
+
+  @Field(() => String)
   account: string;
+  @Field(() => String)
   password: string;
+  @Field(() => String)
   name: string;
+  @Field(() => String)
   email: string;
+  @Field(() => String)
   phone: string;
 
   async toEntity() {
