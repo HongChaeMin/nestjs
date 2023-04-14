@@ -4,7 +4,6 @@ import { ApiResponse } from '../common/exception/api.response';
 import { UserSaveRequest } from './dto/request/save.request';
 import { UserSignInRequest } from './dto/request/sign.in.request';
 import { UserUpdateRequest } from './dto/request/update.request';
-import { IdPipe } from "../common/pipes/id.pipe";
 import { AuthGuard } from '@nestjs/passport';
 import { UserGuard } from '../common/auth/user.guard';
 import { UserId } from '../common/auth/user.param';
