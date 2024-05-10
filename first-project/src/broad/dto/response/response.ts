@@ -1,4 +1,5 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, ObjectType } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 
 @ObjectType()
 export class BroadResponse {
@@ -17,8 +18,15 @@ export class BroadResponse {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
+
+  @ApiProperty({
+    type: String,
+    description: '게시만 아이디',
+    example: 1,
+  })
   @Field(() => Number)
   id: number;
+
   @Field(() => String)
   title: string;
   @Field(() => String)

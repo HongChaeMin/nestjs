@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiResponse } from '../common/exception/api.response';
 import { UserSaveRequest } from './dto/request/save.request';
@@ -10,9 +19,7 @@ import { UserId } from '../common/auth/user.param';
 
 @Controller('/users')
 export class UserController {
-  constructor(
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
@@ -35,7 +42,10 @@ export class UserController {
 
   @UseGuards(UserGuard)
   @Patch('/:userId')
-  async updateUser(@Param('userId') id: number, @Body() request: UserUpdateRequest) {
+  async updateUser(
+    @Param('userId') id: number,
+    @Body() request: UserUpdateRequest,
+  ) {
     const result = await this.userService.updateUser(id, request);
     return ApiResponse.SUCCESS(result);
   }
@@ -45,5 +55,4 @@ export class UserController {
     const result = await this.userService.deleteUser(id);
     return ApiResponse.SUCCESS(result);
   }
-
 }

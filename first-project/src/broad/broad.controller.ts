@@ -13,17 +13,22 @@ import { ErrorCode } from '../common/exception/error.code';
 import { ApiResponse } from '../common/exception/api.response';
 import { BroadUpdateRequest } from './dto/request/update.request';
 import { BroadSaveRequest } from './dto/request/save.request';
+import { GetBroadsDocs, GetErrorDocs } from './decorator/swagger';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('broad')
 @Controller('/broads')
 export class BroadController {
   constructor(private readonly broadService: BroadService) {}
 
+  @GetBroadsDocs()
   @Get()
   async getBroads() {
     const result = await this.broadService.getBroads();
     return ApiResponse.SUCCESS(result);
   }
 
+  @GetErrorDocs()
   @Get('/error')
   getError() {
     throw new BusinessException(ErrorCode.SERVER_ERROR);
