@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Broad } from './entities/broad.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { BusinessException } from '../common/exception/business.exception';
-import { ErrorCode } from '../common/exception/error.code';
 import { BroadSaveRequest } from './dto/request/save.request';
 import { BroadUpdateRequest } from './dto/request/update.request';
 import { BroadDeleteResponse } from './dto/response/delete.response';
@@ -28,7 +26,6 @@ export class BroadService {
 
   async getOneBroad(broadId: number) {
     const broad = await this.broadRepository.findOneBy({ id: broadId });
-    if (!broad) throw new BusinessException(ErrorCode.NOT_EXIST_BROAD);
     return broad.toResponse();
   }
 

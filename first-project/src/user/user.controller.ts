@@ -9,7 +9,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ApiResponse } from '../common/exception/api.response';
 import { UserSaveRequest } from './dto/request/save.request';
 import { UserSignInRequest } from './dto/request/sign.in.request';
 import { UserUpdateRequest } from './dto/request/update.request';
@@ -24,20 +23,17 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @Get()
   async getUser(@UserId() id: number) {
-    const result = await this.userService.findUser(id);
-    return ApiResponse.SUCCESS(result);
+    return await this.userService.findUser(id);
   }
 
   @Post()
   async createUser(@Body() request: UserSaveRequest) {
-    const result = await this.userService.create(request);
-    return ApiResponse.SUCCESS(result);
+    return await this.userService.create(request);
   }
 
   @Post('/sign-in')
   async signIn(@Body() request: UserSignInRequest) {
-    const result = await this.userService.signIn(request);
-    return ApiResponse.SUCCESS(result);
+    return await this.userService.signIn(request);
   }
 
   @UseGuards(UserGuard)
@@ -46,13 +42,11 @@ export class UserController {
     @Param('userId') id: number,
     @Body() request: UserUpdateRequest,
   ) {
-    const result = await this.userService.updateUser(id, request);
-    return ApiResponse.SUCCESS(result);
+    return await this.userService.updateUser(id, request);
   }
 
   @Delete('/:userId')
   async deleteUser(@Param('userId') id: number) {
-    const result = await this.userService.deleteUser(id);
-    return ApiResponse.SUCCESS(result);
+    return await this.userService.deleteUser(id);
   }
 }

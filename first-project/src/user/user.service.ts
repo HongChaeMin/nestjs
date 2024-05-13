@@ -6,8 +6,8 @@ import { JwtService } from '@nestjs/jwt';
 import { UserSaveRequest } from './dto/request/save.request';
 import { UserSignInRequest } from './dto/request/sign.in.request';
 import { UserUpdateRequest } from './dto/request/update.request';
-import { UserSignInResponse } from "./dto/response/sign.in.response";
-import { UserDeleteResponse } from "./dto/response/delete.response";
+import { UserSignInResponse } from './dto/response/sign.in.response';
+import { UserDeleteResponse } from './dto/response/delete.response';
 
 export class UserService {
   constructor(
@@ -23,7 +23,9 @@ export class UserService {
   }
 
   async signIn(request: UserSignInRequest) {
-    const user = await this.userRepository.findOneBy({ account: request.account });
+    const user = await this.userRepository.findOneBy({
+      account: request.account,
+    });
     await UserServiceUtil.checkValid(user, request.password);
     const token = await UserServiceUtil.getToken(this.jwtService, user.id);
     return UserSignInResponse.of(token);
@@ -47,5 +49,4 @@ export class UserService {
     await this.userRepository.delete({ id: id });
     return new UserDeleteResponse('success delete.');
   }
-
 }

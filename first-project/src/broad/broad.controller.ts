@@ -8,9 +8,6 @@ import {
   Post,
 } from '@nestjs/common';
 import { BroadService } from './broad.service';
-import { BusinessException } from '../common/exception/business.exception';
-import { ErrorCode } from '../common/exception/error.code';
-import { ApiResponse } from '../common/exception/api.response';
 import { BroadUpdateRequest } from './dto/request/update.request';
 import { BroadSaveRequest } from './dto/request/save.request';
 import { GetBroadsDocs, GetErrorDocs } from './decorator/swagger';
@@ -24,37 +21,35 @@ export class BroadController {
   @GetBroadsDocs()
   @Get()
   async getBroads() {
-    const result = await this.broadService.getBroads();
-    return ApiResponse.SUCCESS(result);
+    return await this.broadService.getBroads();
   }
 
   @GetErrorDocs()
   @Get('/error')
   getError() {
-    throw new BusinessException(ErrorCode.SERVER_ERROR);
+    throw new Error('Error Test');
   }
 
   @Get('/:broadId')
   async getOneBroad(@Param('broadId') broadId: number) {
-    const result = await this.broadService.getOneBroad(broadId);
-    return ApiResponse.SUCCESS(result);
+    return await this.broadService.getOneBroad(broadId);
   }
 
   @Post()
   async createBroad(@Body() broad: BroadSaveRequest) {
-    const result = await this.broadService.createBroad(broad);
-    return ApiResponse.SUCCESS(result);
+    return await this.broadService.createBroad(broad);
   }
 
   @Patch('/:broadId')
-  async updateBroad(@Param('broadId') broadId: number, @Body() broad: BroadUpdateRequest) {
-    const result = await this.broadService.updateBroad(broadId, broad);
-    return ApiResponse.SUCCESS(result);
+  async updateBroad(
+    @Param('broadId') broadId: number,
+    @Body() broad: BroadUpdateRequest,
+  ) {
+    return await this.broadService.updateBroad(broadId, broad);
   }
 
   @Delete('/:broadId')
   async deleteBroad(@Param('broadId') broadId: number) {
-    const result = await this.broadService.deleteBroad(broadId);
-    return ApiResponse.SUCCESS(result);
+    return await this.broadService.deleteBroad(broadId);
   }
 }

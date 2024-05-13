@@ -1,16 +1,14 @@
-import { BusinessException } from '../../common/exception/business.exception';
-import { ErrorCode } from '../../common/exception/error.code';
 import { isHashValid } from '../../common/encode/password.encode';
+import { HttpException } from '@nestjs/common';
 
 export class UserServiceUtil {
-
   static async checkValid(user, password) {
-    if (!user) throw new BusinessException(ErrorCode.NOT_EXIST_USER);
-    if (await isHashValid(password, user.password)) throw new BusinessException(ErrorCode.NOT_EXIST_USER);
+    if (!user) throw new HttpException('Not exist user', 400);
+    if (await isHashValid(password, user.password))
+      throw new HttpException('Password is not valid', 400);
   }
 
   static getToken(jwtService, id) {
-    return jwtService.signAsync({ id })
+    return jwtService.signAsync({ id });
   }
-
 }

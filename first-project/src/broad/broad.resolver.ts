@@ -6,9 +6,7 @@ import { BroadResponse } from './dto/response/response';
 
 @Resolver()
 export class BroadResolver {
-  constructor(
-    private readonly broadService: BroadService,
-  ) {}
+  constructor(private readonly broadService: BroadService) {}
 
   @Query(() => [BroadResponse])
   async getBroads() {
@@ -26,8 +24,10 @@ export class BroadResolver {
   }
 
   @Mutation(() => BroadResponse)
-  async updateBroad(@Args('broadId') broadId: number, @Args('broad') request: BroadUpdateRequest) {
+  async updateBroad(
+    @Args('broadId') broadId: number,
+    @Args('broad') request: BroadUpdateRequest,
+  ) {
     return await this.broadService.updateBroad(broadId, request);
   }
-
 }

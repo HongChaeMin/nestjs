@@ -1,5 +1,5 @@
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { BusinessException } from 'src/common/exception/business.exception';
+import { HttpException } from '@nestjs/common';
 
 export function GetErrorDocs(): MethodDecorator {
   return (target: string, key: string, descriptor: any) => {
@@ -9,8 +9,8 @@ export function GetErrorDocs(): MethodDecorator {
     })(target, key, descriptor) as MethodDecorator;
 
     ApiOkResponse({
-      description: '회원 로그인 성공',
-      type: BusinessException,
+      description: '에러 반환 성공',
+      type: HttpException,
     })(target, key, descriptor) as MethodDecorator;
   };
 }
