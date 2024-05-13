@@ -11,3 +11,7 @@ Content-Type: application/json
   "email": "email@email.com",
   "phone": "phone"
 }
+
+### error
+GET http://localhost:8080/broads/error
+

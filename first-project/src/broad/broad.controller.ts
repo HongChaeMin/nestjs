@@ -12,6 +12,7 @@ import { BroadUpdateRequest } from './dto/request/update.request';
 import { BroadSaveRequest } from './dto/request/save.request';
 import { GetBroadsDocs, GetErrorDocs } from './decorator/swagger';
 import { ApiTags } from '@nestjs/swagger';
+import { TypeORMError } from 'typeorm';
 
 @ApiTags('broad')
 @Controller('/broads')
@@ -27,7 +28,7 @@ export class BroadController {
   @GetErrorDocs()
   @Get('/error')
   getError() {
-    throw new Error('Error Test');
+    throw new TypeORMError('TypeORM Error');
   }
 
   @Get('/:broadId')

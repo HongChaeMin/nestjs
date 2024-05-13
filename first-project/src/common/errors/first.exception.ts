@@ -1,10 +1,13 @@
 import { BusinessExceptionType, ValidateExceptionType } from './type';
-import { HttpException } from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class FirstException extends HttpException {
-  constructor(errors: BusinessExceptionType[] | ValidateExceptionType[]) {
-    super({ errors }, errors[0].httpStatus);
+  constructor(
+    errors: BusinessExceptionType[] | ValidateExceptionType[],
+    httpStatus?: HttpStatus,
+  ) {
+    super({ errors }, httpStatus ? httpStatus : HttpStatus.BAD_REQUEST);
   }
 
-  private errors: BusinessExceptionType[] | ValidateExceptionType[];
+  errors: BusinessExceptionType[] | ValidateExceptionType[];
 }
