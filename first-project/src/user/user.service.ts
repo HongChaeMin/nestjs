@@ -8,6 +8,7 @@ import { UserSignInRequest } from './dto/request/sign.in.request';
 import { UserUpdateRequest } from './dto/request/update.request';
 import { UserSignInResponse } from './dto/response/sign.in.response';
 import { UserDeleteResponse } from './dto/response/delete.response';
+import { UserException } from './exception/user.excpetion';
 
 export class UserService {
   constructor(
@@ -33,6 +34,7 @@ export class UserService {
 
   async findUser(id: number) {
     const user = await this.userRepository.findOneBy({ id: id });
+    if (!user) throw UserException.NOT_FOUND;
     return user.toResponse();
   }
 

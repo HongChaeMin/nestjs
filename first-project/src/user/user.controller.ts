@@ -26,6 +26,11 @@ export class UserController {
     return await this.userService.findUser(id);
   }
 
+  @Get('/:userId')
+  async getUserById(@Param('userId') id: number) {
+    return await this.userService.findUser(id);
+  }
+
   @Post()
   async createUser(@Body() request: UserSaveRequest) {
     return await this.userService.create(request);

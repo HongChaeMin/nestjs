@@ -4,12 +4,11 @@ import { AppModule } from './app.module';
 import { LoggerService } from './common/logging/logger.service';
 import { LoggingInterceptor } from './common/logging/logging.interceptor';
 import { setupSwagger } from './common/document/swagger.setup';
+import { GlobalValidationPipe } from './common/pips/global-validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(
-    new ValidationPipe({ transform: true, forbidUnknownValues: false }),
-  );
+  app.useGlobalPipes(new GlobalValidationPipe());
   app.useLogger(app.get(LoggerService));
   app.useGlobalInterceptors(new LoggingInterceptor());
 
