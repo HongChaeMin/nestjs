@@ -1,8 +1,5 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { LoggerService } from './common/logging/logger.service';
-import { LoggingInterceptor } from './common/logging/logging.interceptor';
 import { setupSwagger } from './common/document/swagger.setup';
 import { GlobalValidationPipe } from './common/errors/pips/global-validation.pipe';
 import { HttpExceptionFilter } from './common/errors/filters/all.exception.filter';
@@ -10,8 +7,6 @@ import { HttpExceptionFilter } from './common/errors/filters/all.exception.filte
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new GlobalValidationPipe());
-  app.useLogger(app.get(LoggerService));
-  app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
 
   await setupSwagger(app);
