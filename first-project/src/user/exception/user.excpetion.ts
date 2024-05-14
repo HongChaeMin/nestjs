@@ -6,7 +6,7 @@ export class UserException {
   static readonly NOT_FOUND = new FirstException(
     [
       {
-        code: 'user.find.not_found',
+        code: 'user.find.not-found',
         message: '사용자가 존재하지 않습니다.',
         httpStatus: HttpStatus.OK,
       } as BusinessExceptionType,
